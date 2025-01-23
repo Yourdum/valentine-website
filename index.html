@@ -116,27 +116,29 @@
             <button class="button" type="submit" name="response" value="Is that even a question?">Is that even a question?</button>
         </form>
     </div>
-    <script>
-        document.getElementById('valentineForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting immediately
+<script>
+    document.getElementById('valentineForm').addEventListener('submit', function(event) {
+        // No need for event.preventDefault();, form should submit
 
-            const heartsContainer = document.getElementById('hearts');
-            heartsContainer.innerHTML = ''; // Clear any existing hearts
+        const heartsContainer = document.getElementById('hearts');
+        heartsContainer.innerHTML = ''; // Clear any existing hearts
 
-            for (let i = 0; i < 100; i++) { // Increased number of hearts for full-page effect
-                const heart = document.createElement('div');
-                heart.className = 'heart-shower';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() + 's';
-                heartsContainer.appendChild(heart);
-            }
+        for (let i = 0; i < 100; i++) { // Increased number of hearts for full-page effect
+            const heart = document.createElement('div');
+            heart.className = 'heart-shower';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() + 's';
+            heartsContainer.appendChild(heart);
+        }
+        
+        // Show the hearts for a short time, then submit the form
+        setTimeout(function() {
+            // Redirect to surprise.html
+            window.location.href = 'surprise.html';
+        }, 2000); // Adjust time as needed
+    });
+</script>
 
-            // Show the hearts for a short time, then submit the form
-            setTimeout(function() {
-                document.getElementById('valentineForm').submit();
-            }, 2000); // Adjust time as needed
-        });
-    </script>
 </body>
 </html>
 
