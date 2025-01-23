@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8e1e1;
+            color: #333;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            color: #e63946;
+        }
+        .heart {
+            font-size: 100px;
+            color: #e63946;
+        }
+        .message {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1;
+            position: relative;
+        }
+        .button:hover {
+            background-color: #d62828;
+        }
+        .characters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .character {
+            margin: 0 20px;
+        }
+        .character img {
+            width: 150px;
+            height: 150px;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .heart-shower {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+            animation: fall 2s linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-100%);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="container">
+        <div class="characters">
+            <div class="character">
+                <img src="path_to_male_character_image" alt="Male Character in Red Tee">
+                <p>Male Character</p>
+            </div>
+            <div class="heart">❤️</div>
+            <div class="character">
+                <img src="path_to_female_character_image" alt="Female Character in Green Tee">
+                <p>Female Character</p>
+            </div>
+        </div>
+        <h1>Will You Be My Valentine?</h1>
+        <p class="message">Hayyy baby,</p>
+        <p class="message">You make my heart skip a beat every time I see you. Will you be my Valentine?</p>
+        <form action="YOUR_FORMSPREE_ENDPOINT" method="POST" id="valentineForm">
+            <button class="button" type="submit" name="response" value="Yes, of course">Yes, of course</button>
+            <button class="button" type="submit" name="response" value="Is that even a question?">Is that even a question?</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('valentineForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            const heartsContainer = document.getElementById('hearts');
+            heartsContainer.innerHTML = ''; // Clear any existing hearts
+
+            for (let i = 0; i < 100; i++) { // Increased number of hearts for full-page effect
+                const heart = document.createElement('div');
+                heart.className = 'heart-shower';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() + 's';
+                heartsContainer.appendChild(heart);
+            }
+
+            // Show the hearts for a short time, then submit the form
+            setTimeout(function() {
+                document.getElementById('valentineForm').submit();
+            }, 2000); // Adjust time as needed
+        });
+    </script>
+</body>
+</html>
